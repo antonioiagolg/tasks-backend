@@ -25,7 +25,7 @@ public class TaskControllerTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void naoDeveSalvarTarefaSemDescricao() {
+    public void naoDeveSalvarTarefaSemDescricao() throws ValidationException {
         Task todo = new Task();
         todo.setDueDate(LocalDate.now());
         controller.save(todo);
@@ -46,7 +46,6 @@ public class TaskControllerTest {
         controller.save(todo);
     }
 
-    @Test(expected = ValidationException.class)
     public void deveSalvarTarefaComSucesso() {
         Task todo = new Task();
         todo.setTask("Descrição");
