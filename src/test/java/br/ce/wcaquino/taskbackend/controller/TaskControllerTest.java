@@ -32,21 +32,21 @@ public class TaskControllerTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void naoDeveSalvarTarefaSemData() {
+    public void naoDeveSalvarTarefaSemData() throws ValidationException {
         Task todo = new Task();
         todo.setTask("Descrição");
         controller.save(todo);
     }
 
     @Test(expected = ValidationException.class)
-    public void naoDeveSalvarTarefaComDataPassada() {
+    public void naoDeveSalvarTarefaComDataPassada() throws ValidationException {
         Task todo = new Task();
         todo.setTask("Descrição");
         todo.setDueDate(LocalDate.of(2010, 1, 1));
         controller.save(todo);
     }
 
-    public void deveSalvarTarefaComSucesso() {
+    public void deveSalvarTarefaComSucesso()throws ValidationException {
         Task todo = new Task();
         todo.setTask("Descrição");
         todo.setDueDate(LocalDate.now());
