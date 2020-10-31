@@ -27,5 +27,15 @@ pipeline {
                 }
             }
         }
+
+        stage ('Deploy frontend') {
+            steps {
+                dir('tasks-frontend') {
+                    git credentialsId: 'githubLogin', url: 'https://github.com/antonioiagolg/tasks-frontend'
+                    sh 'mvn clean package'
+                    deploy adapters: [tomcat8(credentialsId: 'loginTomcat', path: '', url: 'http://192.168.10.13:8080')], contextPath: 'tasks', war: 'target/tasks.war'
+                }
+            }
+        }
     }
 }
