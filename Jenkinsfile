@@ -37,5 +37,14 @@ pipeline {
                 }
             }
         }
+
+        stage ('Functional test') {
+            steps {
+                dir('functional-test') {
+                    git credentialsId: 'githubLogin', url: 'https://github.com/antonioiagolg/tasks-funcional-test'
+                    sh 'mvn test'
+                }
+            }
+        }
     }
 }
